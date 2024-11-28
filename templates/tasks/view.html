@@ -1,0 +1,77 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ task.title }}</title>  <!-- Use the topic as the page title -->
+</head>
+<body>
+
+<h1>View the task</h1>
+
+<div class="container">
+    {% if task %}
+    <ul>
+
+    <div class="form-field">
+        <div class="text">
+            <p>Title: {{ task.title }}</p>
+        </div>             
+    </div>
+
+    <div class="form-field">
+        <div class="text">
+            <p>Description: {{ task.description }}</p>
+        </div>             
+    </div>
+
+    <div class="form-field">
+        <div class="text">
+            <p>Completed: {{ task.completed }}</p>
+        </div>             
+    </div>
+
+    <div class="form-field">
+        <div class="text">
+            <p>Assigned to: {{ task.user }}</p>
+        </div>             
+    </div>
+
+    <div class="form-field">
+        <div class="text">
+            <p>Deadline: {{ task.deadline }}</p>
+        </div>             
+    </div>
+
+    <div class="form-field">
+        <div class="text">
+            <p>Created: {{ task.create_time }}</p>
+        </div>             
+    </div>
+
+    </ul>
+    {% else %}
+    <p>No task is available. </p>
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+        {% if isUserAdmin or doesTaskBelongToUser %}
+        <div class="submit-block">
+            <button class="submit-button" type="submit" name="action" value="edit">Change this task</button>
+        </div>
+        {% endif %}
+        {% if isUserAdmin %}
+        <div class="submit-block">
+            <button class="submit-button" type="submit" name="action" value="delete">Delete this task</button>
+        </div>
+        {% endif %}
+    </form>
+    <br>
+</div>
+
+{% endblock %}

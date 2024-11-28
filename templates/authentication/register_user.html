@@ -1,0 +1,73 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+
+    <h1>Register</h1>
+
+    <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+                <div>{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="form-field">
+                <div class="text">
+                    <p>Write your username:</p>
+                </div>
+                <div class="input">
+                    {{ form.username }}
+                </div>           
+            </div>
+
+            <div class="form-field">
+                <div class="text">
+                    <p>Write your email:</p>
+                </div>
+                <div class="input">
+                    {{ form.email }}
+                </div>           
+            </div>
+
+            <div class="form-field">
+                <div class="text">
+                    <p>Write your password:</p>
+                </div>
+                <div class="input">
+                    {{ form.password }}
+                </div>           
+            </div>
+
+            <div class="form-field">
+                <div class="text">
+                    <p>Confirm your password:</p>
+                </div>
+                <div class="input">
+                    {{ form.password_confirm }}
+                </div>           
+            </div>
+
+            <!-- {{ form.as_p }} -->
+            <div class="submit-block">
+                <input class="submit-button" type="submit" value="Register">
+            </div>
+            <!-- <button type="submit">Register</button> -->
+        </form>
+
+    </div>
+
+</body>
+</html>
+
+{% endblock %}

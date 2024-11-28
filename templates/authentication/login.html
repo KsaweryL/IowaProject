@@ -1,0 +1,61 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+
+{% load static %}
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+<link rel="stylesheet" href="{% static 'forms.css'%}">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Log in</title>
+</head>
+<body>
+
+    <h1>Log in</h1>
+
+    <div class="container">
+        <form action="/login/" method="POST">
+            {% csrf_token %}
+
+            <div class="form-field">
+                <div class="text">
+                    <p>Write your username:</p>
+                </div>
+                <div class="input">
+                    {{ form.username }}
+                </div>           
+            </div>
+
+            <div class="form-field">
+                <div class="text">
+                    <p>Write your password:</p>
+                </div>
+                <div class="input">
+                    {{ form.password }}
+                </div>           
+            </div>
+
+            <!-- {{ form.as_p }} -->
+            <div class="submit-block">
+                <input class="submit-button" type="submit" value="Log in">
+            </div>
+        </form>
+
+        {% if error %}
+        <div class="error-block">
+            <p>Wrong username or password</p>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+
+{% endblock %}
+

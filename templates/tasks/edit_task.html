@@ -1,0 +1,63 @@
+{% extends "base_template.html" %}
+
+{% block content %}
+
+<h1>Edit a Task</h1>
+
+<div class="container">
+    <form method="POST">
+        {% csrf_token %}
+
+        <div class="form-field">
+            <div class="text">
+                <p>Write a title:</p>
+            </div>
+            <div class="input">
+                {{ form.title }}
+            </div>           
+        </div>
+
+        <div class="form-field">
+            <div class="text">
+                <p>Write a description:</p>
+            </div>
+            <div class="input">
+                {{ form.description }}
+            </div>           
+        </div>
+
+        <div class="form-field">
+            <div class="text">
+                <p>Is it completed:</p>
+            </div>
+            <div class="input">
+                {{ form.completed }}
+            </div>           
+        </div>
+
+        <div class="form-field">
+            <div class="text">
+                <p>Assign a user:</p>
+            </div>
+            <div class="input">
+                {{ form.user }}
+            </div>           
+        </div>
+
+        <div class="form-field">
+            <div class="text">
+                <p>Assign a deadline:</p>
+            </div>
+            <div class="input">
+                {{ form.deadline }}
+            </div>           
+        </div>
+
+        <div class="submit-block">
+            <input class="submit-button" type="submit" value="Submit">
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}

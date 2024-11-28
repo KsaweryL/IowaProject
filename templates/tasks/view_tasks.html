@@ -1,0 +1,96 @@
+{% extends "base_template.html" %}
+
+
+{% block content %}
+
+{% load static %}
+{% load django_bootstrap5 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+<link rel="stylesheet" href="{% static 'tasks/view_tasks.css'%}">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+
+<div class="container">
+    <h2>Tasks</h2>
+
+    <table class="tasks-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Assigned person</th>
+                <th>Completed</th>
+                <th>Deadline</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if tasks %}
+            <ul>
+            {% for n in tasks %}
+            <tr data-deadline="{{ n.deadline|date:'Y-m-d' }}" task-assigned-user="{{ n.user }}">
+                <td><a href="/tasks/{{ n.id }}/">{{ n.title }}</a></td>
+                <td>
+                {{ n.description }}
+                </td>
+
+                <td>
+                {{ n.user }}
+                </td>
+
+                <td>
+                {% if n.completed == True %}
+                Yes
+                {% else %}
+                No
+                {% endif %}
+                </td>
+
+                <td class="last-col">
+                {{ n.deadline }}
+                </td>
+            </tr>
+            {% endfor %}
+            </ul>
+            {% else %}
+            <p>No tasks are available</p>
+            {% endif %}
+        </tbody>
+    </table>
+    <form action="/tasks/add/" method="POST">
+        {% csrf_token %}
+        <button class="link add-new-task-btn" type="submit" name="action" value="Add a task">Add new task</button>
+    </form>
+</div>
+
+    <!-- Bootstrap Modal -->
+    <div class="modal fade" id="taskReminderModal" tabindex="-1" aria-labelledby="taskReminderModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+    
+            <div class="modal-header">
+              <h5 class="modal-title" id="taskReminderModalLabel">Task Reminder</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeHeaderButton"></button>
+            </div>
+    
+            <div class="modal-body">
+              <p id="modal-message"></p>
+            </div>
+    
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeFooterButton">Close</button>
+            </div>
+    
+          </div>
+        </div>
+      </div>
+
+<!-- pass the info (username) on currently logged user to js -->
+<script>
+    const loggedUser = "{{ logged_user|escapejs }}";
+</script>
+
+<script src="{% static 'tasks/js/deadline_popup.js' %}">
+  </script>
+
+{% endblock %}

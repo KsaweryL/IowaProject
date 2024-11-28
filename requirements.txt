@@ -1,0 +1,4 @@
+Django>=3.0,<4.0  # specify the appropriate version
+python-decouple>=3.5,<4.0  # You can specify an appropriate version if needed
+mysqlclient>=2.1.0
+django-bootstrap5>=21.2
