@@ -1,4 +1,3 @@
-// const closeBtn = document.getElementById('closeModal');
 
 document.addEventListener("DOMContentLoaded", function () {
     const tasks = document.querySelectorAll("tr[data-deadline]");
@@ -7,18 +6,24 @@ document.addEventListener("DOMContentLoaded", function () {
     const modalMessage = document.getElementById('modal-message');
     const modal = new bootstrap.Modal(modalElement);
 
+    const closeHeaderButton = document.getElementById('closeHeaderButton');
+    const closeFooterButton = document.getElementById('closeFooterButton');
 
     tasks.forEach(function (task) {
         const taskDeadline = new Date(task.getAttribute("data-deadline"));
         const timeDifference = taskDeadline - currentDate;
-        const assignedUser = task.getAttribute("task-assigned-user");
+        var assignedUser = task.getAttribute("task-assigned-user");
+        const wasTaskCompleted = task.getAttribute("task-assigned-completed");
         const daysDifference = timeDifference / (1000 * 3600 * 24); // Converting to days
 
         const modalMessage = document.getElementById('modal-message');
         const modal = new bootstrap.Modal(document.getElementById('taskReminderModal'));
 
-        //show only if the task in question is assigned to the logged user
-        if(loggedUser == assignedUser){
+        console.log(assignedUser)
+        console.log(loggedUser)
+        console.log(!wasTaskCompleted)
+        //show only if the task in question is assigned to the logged user and the task wasn't completed
+        if(loggedUser == assignedUser && !wasTaskCompleted){
             // Check if deadline is within 2 days or if it has has already passed
             if (daysDifference <= 3 && daysDifference > 0) {
                 modalMessage.textContent = `Reminder: Task '${task.querySelector("td a").textContent}' assigned to you (${assignedUser}) is due in ${Math.ceil(daysDifference)} days.`;
@@ -30,14 +35,13 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Handle modal close event (optional for additional logic)
-    modalElement.addEventListener('hidden.bs.modal', function () {
-        console.log('The modal has been closed.');
-        // Add any additional actions here if needed
+    // console.log(closeHeaderButton)
+    closeHeaderButton.addEventListener('click', function () {
+        modal.hide();
+    });
+
+    closeFooterButton.addEventListener('click', function () {
+        modal.hide();
     });
 
 });
-
-// closeBtn.addEventListener("click", () => {
-//     modal.classList.remove("open");
-// });

@@ -28,7 +28,7 @@
             {% if tasks %}
             <ul>
             {% for n in tasks %}
-            <tr data-deadline="{{ n.deadline|date:'Y-m-d' }}" task-assigned-user="{{ n.user }}">
+            <tr data-deadline="{{ n.deadline|date:'Y-m-d' }}" task-assigned-user="{{ n.user }}" task-assigned-completed="{{ n.completed }}">
                 <td><a href="/tasks/{{ n.id }}/">{{ n.title }}</a></td>
                 <td>
                 {{ n.description }}
