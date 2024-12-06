@@ -52,6 +52,17 @@ def register_user(request):
     if request.method == 'POST':
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
+
+            #check passwords
+            password = form.cleaned_data['password']
+            password_confirm = form.cleaned_data['password_confirm']
+            
+            # Check if password and password_confirm match
+            if password != password_confirm:
+                form.add_error('password_confirm', 'Passwords do not match')
+                return render(request, 'registration/register.html', {'form': form})
+            
+            #if valid, create user with hashed password
             user = form.save(commit=False)
             user.set_password(form.cleaned_data['password'])
             user.save()

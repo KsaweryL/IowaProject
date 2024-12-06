@@ -11,6 +11,7 @@ from django.contrib.auth.models import User
 @login_required
 def view_tasks(request):
     all_tasks = Task.objects.order_by('-create_time')
+    users = User.objects.all()
 
     #pass the user to html
     user = request.user.username
@@ -20,14 +21,22 @@ def view_tasks(request):
         if action == 'Add a task':
             return redirect('add-task')
         
-    task_filter = request.GET.get('title')
-    if task_filter:
-        if task_filter is not "None":
-            tasks = all_tasks.filter(id=task_filter)
+    title_filter = request.GET.get('title')
+    if title_filter:
+        if title_filter != "None":
+            tasks = all_tasks.filter(id=title_filter)
+        else:
+            tasks = all_tasks
     else:
         tasks = all_tasks
 
-    context = {'tasks': tasks, 'logged_user': user, 'allTasks': all_tasks}
+    assigned_person_filter = request.GET.get('assigned_person')
+    if assigned_person_filter:
+        print(assigned_person_filter)
+        if assigned_person_filter != "None":
+            tasks = tasks.filter(user__id=assigned_person_filter)
+
+    context = {'tasks': tasks, 'logged_user': user, 'allTasks': all_tasks, 'users': users}
 
     return render(request, 'tasks/view_tasks.html', context)
 

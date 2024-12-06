@@ -14,35 +14,35 @@
 <div class="container">
     <h2>Tasks</h2>
 
-    <!-- <form method="get">
+    <form method="get">
       <div class="filter-label">
-          <label class="label filter category" for="category">Filter by title:</label>
+          <label class="label filter title" for="title">Filter by title:</label>
           <div class="input-col">
 
-            <select name="title" id="title-dropdown" value="{{ request.GET.tasks }}">
-              <option value="{{ tasks.id }}">
+            <select name="title" id="title-dropdown" value="{{ request.GET.title }}">
+              <option >
                   None
               </option>
 
-              {% for t in tasks %}
-                  <option value="{{ tasks.id }}" >
+              {% for t in allTasks %}
+                  <option value="{{ t.id }}" >
                       {{ t.title }}
                   </option>
               {% endfor %}
 
           </select>
           </div>
-          <label class="label filter name" for="category">Filter by assigned person:</label>
+          <label class="label filter assigned_person" for="assigned_person">Filter by assigned person:</label>
           <div class="input-col">
               
             <select name="assigned_person" id="assigned_person" value="{{ request.GET.assigned_person }}">
-              <option value="{{ t.id }}">
+              <option >
                   None
               </option>
 
-              {% for task in tasks %}
-                  <option value="{{ t.id }}" >
-                      {{ category.name }}
+              {% for user in users %}
+                  <option value="{{ user.id }}" >
+                      {{ user.username }}
                   </option>
               {% endfor %}
 
@@ -51,7 +51,7 @@
           </div> 
       </div>
           <button class="link filter-btn" type="submit">Filter</button>
-    </form> -->
+    </form>
 
     <table class="tasks-table">
         <thead>

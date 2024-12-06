@@ -137,7 +137,7 @@ body{
 
 /* Popup */
 .popup-taskReminder{
-    display: flex;
+    display: none;
     position: fixed;
     background: rgba(0, 0, 0, 0.397);
     justify-content: center;

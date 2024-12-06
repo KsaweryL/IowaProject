@@ -26,10 +26,14 @@ document.addEventListener("DOMContentLoaded", function () {
             // Check if deadline is within 2 days or if it has has already passed
             if (daysDifference <= 3 && daysDifference > 0) {
                 message.textContent = `Reminder: Task '${task.querySelector("td a").textContent}' assigned to you (${assignedUser}) is due in ${Math.ceil(daysDifference)} days.`;
+                popup.style.display = 'flex';
             } else if (daysDifference < 0) {
                 message.textContent = "Task '" + task.querySelector("td a").textContent + "' deadline has passed!";
+                popup.style.display = 'flex';
             }
+            
         }
+       
     });
 
     if (closeHeaderButton) {
