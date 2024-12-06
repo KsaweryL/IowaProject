@@ -14,6 +14,45 @@
 <div class="container">
     <h2>Tasks</h2>
 
+    <!-- <form method="get">
+      <div class="filter-label">
+          <label class="label filter category" for="category">Filter by title:</label>
+          <div class="input-col">
+
+            <select name="title" id="title-dropdown" value="{{ request.GET.tasks }}">
+              <option value="{{ tasks.id }}">
+                  None
+              </option>
+
+              {% for t in tasks %}
+                  <option value="{{ tasks.id }}" >
+                      {{ t.title }}
+                  </option>
+              {% endfor %}
+
+          </select>
+          </div>
+          <label class="label filter name" for="category">Filter by assigned person:</label>
+          <div class="input-col">
+              
+            <select name="assigned_person" id="assigned_person" value="{{ request.GET.assigned_person }}">
+              <option value="{{ t.id }}">
+                  None
+              </option>
+
+              {% for task in tasks %}
+                  <option value="{{ t.id }}" >
+                      {{ category.name }}
+                  </option>
+              {% endfor %}
+
+            </select>
+
+          </div> 
+      </div>
+          <button class="link filter-btn" type="submit">Filter</button>
+    </form> -->
+
     <table class="tasks-table">
         <thead>
             <tr>
@@ -63,26 +102,24 @@
     </form>
 </div>
 
-    <!-- Bootstrap Modal -->
-    <div class="modal fade" id="taskReminderModal" tabindex="-1" aria-labelledby="taskReminderModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
+<!-- popup -->
+    <div class="popup-taskReminder" id="taskReminder">
+          <div class="content-popup">
     
-            <div class="modal-header">
-              <h5 class="modal-title" id="taskReminderModalLabel">Task Reminder</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="closeHeaderButton"></button>
+            <div class="header-popup">
+              <h5 class="header-popup-title" id="taskReminderModalLabel">Task Reminder</h5>
+              <button id="popup-close-header" class="close">&times;</button>
             </div>
     
-            <div class="modal-body">
-              <p id="modal-message"></p>
+            <div class="body-popup">
+              <p id="body-popup-message"></p>
             </div>
     
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="closeFooterButton">Close</button>
+            <div class="footer-popup">
+              <button id="popup-close-footer" class="close">Close </button>
             </div>
     
           </div>
-        </div>
       </div>
 
 <!-- pass the info (username) on currently logged user to js -->
