@@ -76,6 +76,8 @@ body{
         text-align: center;
         border-top: 3px solid #cf2e01;
         border-bottom: 3px solid #cf2e01;
+
+        max-width: 200px;
     }
 
     .tasks-table tbody tr{
@@ -90,6 +92,12 @@ body{
         color: #000000;
         text-align: right;
         border-right: 1px solid #cf2e01;
+
+        word-wrap: break-word; 
+        overflow-wrap: break-word; 
+        white-space: normal; 
+
+        max-width: 200px;
 
     }
 
